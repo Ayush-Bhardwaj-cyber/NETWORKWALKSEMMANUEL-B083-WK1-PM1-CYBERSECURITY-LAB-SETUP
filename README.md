@@ -1,4 +1,4 @@
-<img width="855" height="535" alt="image" src="https://github.com/user-attachments/assets/0f05d2e3-eb41-4663-8125-73afeceb7ee4" /># 🛡️ Networkwalks – Week 1 Cybersecurity Lab Setup
+# 🛡️ Networkwalks – Week 1 Cybersecurity Lab Setup
 
 ## 📌 Project Overview
 
