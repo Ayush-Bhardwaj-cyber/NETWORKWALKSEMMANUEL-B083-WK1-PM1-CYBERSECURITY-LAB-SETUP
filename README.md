@@ -1,4 +1,4 @@
-# 🛡️ Networkwalks – Week 1 Cybersecurity Lab Setup
+<img width="855" height="535" alt="image" src="https://github.com/user-attachments/assets/0f05d2e3-eb41-4663-8125-73afeceb7ee4" /># 🛡️ Networkwalks – Week 1 Cybersecurity Lab Setup
 
 ## 📌 Project Overview
 
@@ -63,7 +63,8 @@ The DHCP configuration was adjusted to avoid conflicts with the static IP assign
 
 **Screenshot: NAT Network Configuration**
 
-![VirtualBox NAT Network Configuration](screenshots/nat-network.png)
+<img width="1279" height="747" alt="image" src="https://github.com/user-attachments/assets/9104fd1a-2423-4279-925d-d644acd36c21" />
+
 
 ### 4. Start Kali Linux
 
@@ -73,7 +74,8 @@ The shared folder was also made accessible from the Kali Linux desktop.
 
 **Screenshot: Kali Linux Desktop**
 
-![Kali Linux Desktop](screenshots/kali-desktop.png)
+<img width="855" height="535" alt="image" src="https://github.com/user-attachments/assets/a67026e2-fae8-4ff4-a1e6-ad430b2e04d1" />
+
 
 ### 5. Configure the Static IP Address
 
@@ -104,6 +106,11 @@ Verified the network configuration:
 ip addr show eth0
 ip route
 ```
+
+**Screenshot: network configuration verified**
+
+<img width="220" height="38" alt="image" src="https://github.com/user-attachments/assets/a08d3209-0881-466e-9a62-593c97881c99" />
+
 
 **Note:** These commands configure the address and DNS for the current session. Persistent network configuration may be required after restarting the virtual machine.
 
@@ -136,6 +143,11 @@ ls /downloads
 
 The files were successfully listed in the terminal.
 
+**Screenshot: Shared Files**
+
+<img width="859" height="190" alt="image" src="https://github.com/user-attachments/assets/d64e0c1e-16bb-499f-a3f9-c2daa58d8c22" />
+
+
 ### 7. Test Internet Connectivity
 
 Tested connectivity to an external IP address:
@@ -152,9 +164,10 @@ ping -c 4 google.com
 
 Both tests completed successfully, with four packets received and **0% packet loss** in the displayed domain-name test.
 
-**Screenshot: Shared Files, IP Configuration and Connectivity Test**
+**Screenshot: IP Configuration and Connectivity Test**
 
-![Kali Linux Network and Shared Folder Verification](screenshots/network-and-downloads.png)
+<img width="428" height="172" alt="image" src="https://github.com/user-attachments/assets/118f658b-9177-4ab7-9abf-29810a7177cb" />
+
 
 ## 🐛 Troubleshooting
 
