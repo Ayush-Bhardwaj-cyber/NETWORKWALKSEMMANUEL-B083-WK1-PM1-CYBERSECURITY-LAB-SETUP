@@ -24,7 +24,8 @@ Set up a Kali Linux virtual machine using Oracle VirtualBox and configure its ne
 - Shared folder: `/downloads`
 
 ## Screenshot Evidence
-See the `screenshots/` directory for proof of the Kali network configuration, internet connectivity, and shared folder access.
+<img width="859" height="541" alt="image" src="https://github.com/user-attachments/assets/fc07b4ad-9b1a-4818-b267-b7235e31d4f2" />
+
 
 ## Troubleshooting
 Initially, the static IP address could not be assigned because the VirtualBox DHCP server was using `10.0.0.2`. I changed the DHCP server address and its allocation range so that the required static IP was available.
