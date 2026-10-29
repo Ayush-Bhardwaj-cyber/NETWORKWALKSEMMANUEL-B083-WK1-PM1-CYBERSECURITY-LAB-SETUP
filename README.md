@@ -57,7 +57,7 @@ Started Kali Linux successfully and accessed its desktop environment.
 
 **Screenshot: Kali Linux Desktop**
 
-<img width="1279" height="747" alt="Screenshot 2026-10-29 192539" src="https://github.com/user-attachments/assets/7b3d3ad3-3068-45de-9ca0-baae2894e97a" />
+<img width="428" height="268" alt="Screenshot 2026-10-29 192822" src="https://github.com/user-attachments/assets/c9e32609-ac3c-4b02-8127-ab8f126dbff7" />
 
 ### 5. Configure the Kali Linux Network Interface
 
