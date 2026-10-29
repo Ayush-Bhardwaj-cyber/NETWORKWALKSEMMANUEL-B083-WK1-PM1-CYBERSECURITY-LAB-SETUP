@@ -2,228 +2,157 @@
 
 ## 📌 Project Overview
 
-This repository documents my Week 1 lab setup for the **Networkwalks Cybersecurity Internship Program – Batch B083**.
+This repository documents my Week 1 cybersecurity lab setup for the **Networkwalks Cybersecurity Internship Program – Batch B083**.
 
-The objective was to create a Kali Linux virtual machine, configure its network settings, establish internet connectivity, and enable file sharing between the Windows host and the virtual machine.
+The objective was to set up Kali Linux in VirtualBox, configure the virtual network, access shared files, and verify internet connectivity.
 
-## 🧰 Tools and Technologies
+## 🧰 Tools Used
 
 | Tool | Purpose |
 |---|---|
 | Windows 10 | Host operating system |
-| Oracle VirtualBox 7.2 | Virtualization software |
-| Kali Linux | Cybersecurity testing environment |
-| NAT Network | Virtual machine network connectivity |
-| Shared Folders | File transfer between host and VM |
-| Terminal | Network configuration and testing |
+| Oracle VirtualBox 7.2 | Virtual machine management |
+| Kali Linux | Cybersecurity lab environment |
+| VirtualBox NAT Network | Network connectivity |
+| Shared Folders | Accessing host files from Kali Linux |
+| Linux Terminal | Network configuration and testing |
 
-## 🏗️ Lab Architecture
+## 🏗️ Lab Configuration
 
-The lab uses a Windows host running VirtualBox, with Kali Linux connected to a VirtualBox NAT Network.
-
-- **Host OS:** Windows 10
-- **Virtualization:** Oracle VirtualBox
-- **Guest OS:** Kali Linux
-- **Network Name:** `NatNetwork`
-- **Network Subnet:** `10.0.0.0/24`
-- **Kali Linux IP:** `10.0.0.2/24`
-- **Gateway:** `10.0.0.1`
-- **DNS Servers:** `1.1.1.1`, `8.8.8.8`
-- **Shared Folder:** `Downloads`
-- **Guest Mount Point:** `/downloads`
+| Component | Configuration |
+|---|---|
+| Virtual Machine | Kali Linux |
+| Virtual Network | `NatNetwork` |
+| IPv4 Network | `10.0.0.0/24` |
+| DHCP | Enabled |
+| IPv6 | Disabled |
+| Network Interface | `eth0` |
+| Kali Linux IP | `10.0.0.2/24` |
+| Shared Folder | `Downloads` |
+| Guest Mount Point | `/downloads` |
 
 ## ⚙️ Step-by-Step Implementation
 
-### 1. Install VirtualBox
+### 1. Set Up VirtualBox
 
-Installed Oracle VirtualBox on the Windows host to create and manage virtual machines.
+Used Oracle VirtualBox to run Kali Linux in a virtual machine on the Windows host.
 
-VirtualBox provides an isolated environment for running Kali Linux without replacing the host operating system.
+### 2. Start Kali Linux
 
-### 2. Import Kali Linux
-
-Imported the Kali Linux virtual machine into VirtualBox and started it successfully.
-
-After booting, I verified that the Kali Linux desktop was accessible.
+Started the Kali Linux virtual machine and accessed its desktop environment.
 
 ### 3. Configure the NAT Network
 
-Created a VirtualBox NAT Network named `NatNetwork`.
+Configured a VirtualBox NAT Network named `NatNetwork`.
 
-The network was configured with the following settings:
-
-| Setting | Value |
-|---|---|
-| Network Name | `NatNetwork` |
-| IPv4 Prefix | `10.0.0.0/24` |
-| DHCP | Enabled |
-| IPv6 | Disabled |
-
-The DHCP configuration was adjusted to avoid conflicts with the static IP assigned to Kali Linux.
+The network uses the IPv4 subnet `10.0.0.0/24`. DHCP was enabled, and IPv6 was disabled in the displayed configuration.
 
 **Screenshot: NAT Network Configuration**
 
-<img width="1279" height="747" alt="image" src="https://github.com/user-attachments/assets/9104fd1a-2423-4279-925d-d644acd36c21" />
+<img width="1279" height="747" alt="Screenshot 2026-10-29 192539" src="https://github.com/user-attachments/assets/8a635dcc-1fb5-467b-9121-cb77e068073f" />
 
+### 4. Access the Kali Linux Desktop
 
-### 4. Start Kali Linux
-
-Started the Kali Linux virtual machine and verified that the desktop environment was working.
-
-The shared folder was also made accessible from the Kali Linux desktop.
+Started Kali Linux successfully and accessed its desktop environment.
 
 **Screenshot: Kali Linux Desktop**
 
-<img width="855" height="535" alt="image" src="https://github.com/user-attachments/assets/a67026e2-fae8-4ff4-a1e6-ad430b2e04d1" />
+<img width="1279" height="747" alt="Screenshot 2026-10-29 192539" src="https://github.com/user-attachments/assets/7b3d3ad3-3068-45de-9ca0-baae2894e97a" />
 
+### 5. Configure the Kali Linux Network Interface
 
-### 5. Configure the Static IP Address
+Assigned the static IPv4 address `10.0.0.2/24` to the `eth0` network interface and brought the interface up.
 
-Configured the Kali Linux network interface `eth0` with a static IPv4 address.
+Commands used:
 
 ```bash
 sudo ip addr add 10.0.0.2/24 dev eth0
 sudo ip link set eth0 up
-sudo ip route replace default via 10.0.0.1
 ```
 
-Configured DNS servers:
-
-```bash
-sudo nano /etc/resolv.conf
-```
-
-Added the following entries:
-
-```text
-nameserver 1.1.1.1
-nameserver 8.8.8.8
-```
-
-Verified the network configuration:
+Verified the interface configuration using:
 
 ```bash
 ip addr show eth0
-ip route
 ```
 
-**Screenshot: network configuration verified**
+**Screenshot: Interface configuration**
 
-<img width="220" height="38" alt="image" src="https://github.com/user-attachments/assets/a08d3209-0881-466e-9a62-593c97881c99" />
+<img width="439" height="76" alt="image" src="https://github.com/user-attachments/assets/6314124c-d661-4131-b0b8-af0c252a5b48" />
 
+The terminal output showed the assigned IP address and that the interface was up.
 
-**Note:** These commands configure the address and DNS for the current session. Persistent network configuration may be required after restarting the virtual machine.
+### 6. Access the Shared Folder
 
-### 6. Configure the Shared Folder
+Accessed the VirtualBox shared folder from Kali Linux using the guest mount point `/downloads`.
 
-Created a shared folder in VirtualBox with the following settings:
-
-- **Folder Name:** `Downloads`
-- **Auto-mount:** Enabled
-- **Access:** Read/write
-- **Guest Mount Point:** `/downloads`
-
-Created the mount directory inside Kali Linux:
+The shared folder was mounted with:
 
 ```bash
 sudo mkdir -p /downloads
-```
-
-Mounted the shared folder:
-
-```bash
 sudo mount -t vboxsf Downloads /downloads
 ```
 
-Verified that the shared files were accessible:
+Verified access to the files using:
 
 ```bash
 ls /downloads
 ```
 
-The files were successfully listed in the terminal.
+**Screenshot: Downloads Folder**
 
-**Screenshot: Shared Files**
+<img width="859" height="190" alt="image" src="https://github.com/user-attachments/assets/12423e17-1236-4d24-ae06-b8897cbd33e6" />
 
-<img width="859" height="190" alt="image" src="https://github.com/user-attachments/assets/d64e0c1e-16bb-499f-a3f9-c2daa58d8c22" />
-
+The terminal displayed the files available in the shared folder.
 
 ### 7. Test Internet Connectivity
 
-Tested connectivity to an external IP address:
-
-```bash
-ping -c 4 1.1.1.1
-```
-
-Tested DNS resolution and connectivity using a domain name:
+Tested connectivity and domain-name resolution using:
 
 ```bash
 ping -c 4 google.com
 ```
 
-Both tests completed successfully, with four packets received and **0% packet loss** in the displayed domain-name test.
+The test completed successfully:
 
-**Screenshot: IP Configuration and Connectivity Test**
+- Packets transmitted: 4
+- Packets received: 4
+- Packet loss: 0%
 
-<img width="428" height="172" alt="image" src="https://github.com/user-attachments/assets/118f658b-9177-4ab7-9abf-29810a7177cb" />
+This verified that the domain-name ping test succeeded at the time of testing.
 
+**Screenshot: Network Interface and Ping Test**
+
+<img width="428" height="172" alt="Screenshot 2026-10-29 193332" src="https://github.com/user-attachments/assets/49537e52-de1f-41f0-a32b-2b321381858f" />
 
 ## 🐛 Troubleshooting
 
-### Issue 1: Static IP Address Conflict
+### Static IP Address Conflict
 
-**Problem:** The desired static IP address could not be assigned because it conflicted with the VirtualBox DHCP configuration.
+Encountered a conflict between the desired static IP address and the VirtualBox DHCP configuration.
 
-**Solution:** Adjusted the DHCP server and address pool so that the static address `10.0.0.2` did not overlap with the dynamically assigned range.
+Adjusted the DHCP configuration to resolve the address conflict and allow Kali Linux to use `10.0.0.2`.
 
-### Issue 2: Shared Folder Not Accessible
-
-**Problem:** The shared folder was not immediately available inside Kali Linux.
-
-**Solution:** Verified the VirtualBox shared-folder configuration, created `/downloads`, and mounted the shared folder manually using `mount -t vboxsf`.
-
-### Issue 3: Internet Connectivity Verification
-
-**Problem:** Network configuration needed to be verified after assigning the static IP.
-
-**Solution:** Checked the interface and routing configuration, then tested connectivity using `ping` against an IP address and a domain name.
-
-## 🔐 Security Considerations
-
-- Use a virtual machine to keep cybersecurity lab activities separate from the host environment.
-- Perform scanning and penetration-testing exercises only on authorized systems.
-- Keep the virtual machine updated.
-- Avoid exposing unnecessary services or ports.
-- Create a clean VirtualBox snapshot before performing experiments that may affect the system.
-- Do not store passwords, private keys, or other sensitive information in the repository.
 
 ## 📚 Learning Outcomes
 
-Through this lab, I learned how to:
-
-- Set up a Kali Linux virtual machine using VirtualBox.
-- Configure a NAT Network and understand IPv4 subnetting.
-- Assign a static IP address and configure a default gateway.
-- Configure DNS servers and test network connectivity.
-- Create and mount shared folders between Windows and Kali Linux.
-- Troubleshoot basic network and shared-folder configuration issues.
-
-## 🚀 Next Steps
-
-- Verify network configuration after a virtual machine reboot.
-- Configure persistent network settings if required.
-- Create and verify a clean VirtualBox snapshot.
-- Continue with network reconnaissance and cybersecurity lab exercises.
+- Set up and accessed a Kali Linux virtual machine.
+- Configured a VirtualBox NAT Network.
+- Assigned an IPv4 address to a Linux network interface.
+- Accessed shared files through VirtualBox shared folders.
+- Used the Linux terminal to inspect network settings.
+- Tested connectivity using the `ping` command.
+- Troubleshot network address conflicts and shared-folder access.
 
 ## 👨‍💻 Author
 
-**Ayush Bhardwaj**  
+**Ayush Bhardwaj**
+
 Networkwalks Cybersecurity Internship Program – Batch B083
 
-- **GitHub Repository:** [NETWORKWALKSEMMANUEL-B083-WK1-PM1-CYBERSECURITY-LAB-SETUP](https://github.com/Ayush-Bhardwaj-cyber/NETWORKWALKSEMMANUEL-B083-WK1-PM1-CYBERSECURITY-LAB-SETUP)
-- **LinkedIn Post:** [View LinkedIn Update](https://lnkd.in/p/e3wQUS7c)
+- **GitHub Repository:** [Cybersecurity Lab Setup](https://github.com/Ayush-Bhardwaj-cyber/NETWORKWALKSEMMANUEL-B083-WK1-PM1-CYBERSECURITY-LAB-SETUP)
+- **LinkedIn Update:** [View LinkedIn Post](https://lnkd.in/p/e3wQUS7c)
 
 ---
 
-*Week 1 – Cybersecurity Lab Setup | Networkwalks Internship Program*
+*Week 1 – Cybersecurity Lab Setup*
